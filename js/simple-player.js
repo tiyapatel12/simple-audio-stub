@@ -1,3 +1,9 @@
+/**
+ * This formatTime function will format time from seconds to a human readable time.
+ * This funciton has been given to you and you don't need to understand how it works.
+ * @param {number} secs 
+ * @returns {string} a string with hours:minutes:seconds OR minutes:seconds if we're at the hour 00. 
+ */
 function formatTime(secs) {
     let hours = Math.floor(secs / 3600);
     let minutes = Math.floor((secs - (hours * 3600)) / 60);
