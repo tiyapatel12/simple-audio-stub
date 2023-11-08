@@ -68,8 +68,8 @@ You can do so by adding the line below to your html head:
 ## Step Two: Adding Play Button
 
 Let's now move on to creating the body for our `html`:
-- Create a `div` with `id` `"container"` - This div element will contain the rest of the body.
-- Inside the `div` add an `img` with `id` `"play-pause-button"` and `src` `"images/play.svg"`
+- Create a `div` with **id** `"container"` - This div element will contain the rest of the body.
+- Inside the `div` add an `img` with **id** `"play-pause-button"` and **src** `"images/play.svg"`
 
 <details>
 <summary>Solution</summary>
@@ -95,5 +95,83 @@ The play button is gigantic! We need to fix the css. Let's do this on the next s
 
 ### Step Three: Initial Styling
 
-Let's add some styling and, in the meantime, fix this gigantic image issue.
+Let's add some styling and, in the meantime, fix this gigantic image issue:
 
+- Open the `simple-player.css` file
+- Create a css selector for the container div through its id
+- Give it a `width` of `330px`, a `height` of `50px`, a `background-color` of value `bisque` and a `border-radius` of `10px`
+    
+    This will createn display the div in an audio bar style.
+
+<details><summary>Solution</summary>
+
+You can add these properties with the following `css`:
+
+```css
+#container {
+    /* Audio player bar style */
+    width: 330px;
+    height: 50px;
+    background-color: bisque;
+    border-radius: 10px;
+  }
+```
+
+</details>
+
+Let's now fix the play image width:
+
+- Create a css selector for the play image through its id
+- Give it a `width` of `20px`, a `height` of `20px`, a `padding-left` of `10px` and a `padding-right` of `10px`
+    
+    This will make the image smaller and add some padding between the image and the containing div
+<details><summary>Solution</summary>
+
+You can add these properties with the following `css`:
+
+```css
+#play-pause-button {
+  /* Fix width and height */
+  width: 20px;
+  height: 20px;
+
+  /* Add padding to give space to left and right */
+  padding-left: 10px;
+  padding-right: 10px;
+}
+```
+
+</details>
+
+If you now look at the website, the play button is aligned to the top, but in an audio player bar usually we want buttons centred.
+
+This is fixable by smartly using the `flex` display property in `css`. On top of giving this property, we wnat to set it in `row` direction, rather than `column`, since any object that we continue adding to the bar should be displayed horizontally. To add this:
+
+- In the `#container` css selector:
+
+    Set the `display` property to `flex` - to give the `div` flex properties
+
+    Set the `flex-direction` property to `row` - to make sure any other elements (such as the seek bar or timer) we add are added horizontally
+
+    Set the `align-items` property to `center` - to make the `play` button vertically align in the middle
+
+<details><summary>Solution</summary>
+
+Your `#container` selector should now look like this
+
+```css #8-11
+#container {
+    /* Audio player bar style */
+    width: 330px;
+    height: 50px;
+    background-color: bisque;
+    border-radius: 10px;
+
+    /* Flex display properties */
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+```
+
+</details>
