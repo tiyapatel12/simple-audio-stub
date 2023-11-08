@@ -1,3 +1,5 @@
+
+
 /**
  * This formatTime function will format time from seconds to a human readable time.
  * This funciton has been given to you and you don't need to understand how it works.
