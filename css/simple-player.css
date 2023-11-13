@@ -39,6 +39,9 @@ h4 {
   border-radius: round;
   height: 50px;
 
+}
+
+#play-pause-container:disabled {
   /* set grey background at beginning */
 	background: grey;
   opacity: 50%;
