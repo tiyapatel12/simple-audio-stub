@@ -10,17 +10,20 @@ h4 {
   user-select: none;
 }
 
-#container {
+#player {
   /* Audio player bar style */
   width: 330px;
   height: 50px;
   background-color: bisque;
   border-radius: 10px;
+}
 
+.container {
   /* Flex display properties */
   display: flex;
   align-items: center;
   flex-direction: row;
+  margin-top: 5px;
 }
 
 /*  play-pause-container button style*/
@@ -66,4 +69,19 @@ h4 {
 #total-time {
   width: 40px;
   padding-left: 10px;
+}
+
+/* select buttons used to change song */
+.song-change {
+  background-color: bisque;
+  margin-left: 5px;
+  border: none;
+  border-radius: 10%;
+
+}
+
+/* select buttons used to change song on hover */
+.song-change:hover {
+  background-color: coral;
+  color: white;
 }

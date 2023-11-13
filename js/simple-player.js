@@ -1,5 +1,8 @@
+//  array storing the paths to the different audio soruces
+const AUDIO_SOURCE_PATHS = ["audio/Soft-Background-for-Interview.webm", "audio/Audio_2.wav"]
+
 // audio object that stores the audio file
-const audio = new Audio("audio/Soft-Background-for-Interview.webm");
+const audio = new Audio(AUDIO_SOURCE_PATHS[0]);
 
 // button object that references the image with id "play-pause-button"
 const button = document.getElementById("play-pause-button");
@@ -9,11 +12,18 @@ const trackTime = document.getElementById("current-time");
 const totalTime = document.getElementById("total-time");
 const seekBar = document.getElementById("seek-bar");
 
+// next / previous buttons
+const nextButton = document.getElementById("next-song");
+const previousButton = document.getElementById("previous-song");
+
 //select play / pause button container element
 const buttonContainer = document.getElementById("play-pause-container");
 
 // Store whether the user is currently dragging the seek bar
 let seeking = false;
+
+// Store which audio out of the different sources we are currently playing - starts at zero
+let audioSourceIndex = 0;
 
 // When the play button is clicked, play or pause audio according to state
 button.onclick = function () {
@@ -92,6 +102,38 @@ seekBar.onchange = function () {
   // Set seeking to false
   seeking = false;
 };
+
+// When nextButton is clicked, update audio source to the next one in the list
+nextButton.onclick = function () {
+  // increase audio source index
+  audioSourceIndex++;
+  // check new index is in bounds
+  if(audioSourceIndex >= AUDIO_SOURCE_PATHS.length) {
+    audioSourceIndex = 0;
+  }
+
+  // update audio src
+  audio.src = AUDIO_SOURCE_PATHS[audioSourceIndex];
+
+  // change image icon in case we changed midway through playing
+  button.src = "images/play.svg";
+}
+
+//When previousButton is clicked, update audio source to the previous one in the list
+previousButton.onclick = function () {
+  // decrease audio source index
+  audioSourceIndex--;
+  // check new index is in bounds
+  if(audioSourceIndex < 0) {
+    audioSourceIndex = AUDIO_SOURCE_PATHS.length - 1;
+  }
+
+  // update audio src
+  audio.src = AUDIO_SOURCE_PATHS[audioSourceIndex];
+  
+  // change image icon in case we changed midway through playing
+  button.src = "images/play.svg";
+}
 
 /**
  * This formatTime function will format time from seconds to a human readable time.
