@@ -34,6 +34,8 @@ h4 {
 	font: inherit;
 	cursor: pointer;
 	outline: inherit;
+  background-color: inherit;
+  opacity: 100%;
 
   /* Give a border radius and height */
   border-radius: round;

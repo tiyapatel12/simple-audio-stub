@@ -70,10 +70,6 @@ audio.ontimeupdate = function (){
 audio.oncanplaythrough = function() {
   buttonContainer.disabled = false;
   seekBar.disabled = false;
-  
-  //Remove grey background from button container so user knows they can use it
-  buttonContainer.style.background = 'none';
-  buttonContainer.style.opacity = 1;
 }
 
 // Detect when audio finishes playing and restart all necessary values
