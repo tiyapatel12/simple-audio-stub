@@ -601,3 +601,85 @@ audio.ontimeupdate = function (){
 </details>
 
 With these new changes, your audio should now be allowing the user to change the audio's time live! - Bear in mind the example audio is very similar along the way. To make sure it's changing, let it play for a bit, then drag bar to the beginning and see if it restarts.
+
+There is one last thing to do for the seek bar. We need to reset all values when the audio has ended playing. We can do this with the `audio.onend` event, which detects when the audio has ended playing. Luckily, the `Audio` object that javascript provides is very intelligent, and will set the `paused` property of the audio to true for us, restart it's time etc. But we still need to make sure the button, track time and seek bar are displayed correctly:
+
+- Add an `audio.onend` event listener which:
+  - Sets the `button.src` to `"images/play.svg"`, to allow user to start playing audio again
+  - Set `trackTime.innerHTML` to `formatTime(0)` to restart it
+  - Set `seekBar.value` to `0` to restart it
+
+```javascript
+// Detect when audio finishes playing and restart all necessary values
+audio.onended = function () {
+    button.src = "images/play.svg";
+    trackTime.innerHTML = formatTime(0);
+    seekBar.value = 0;
+}
+```
+
+## The last touches
+
+There are some last changes to make, which are not integral, but ma make the audio player not work properly in very specific environments.
+
+### Making sure the audio loads before we allow the user to play it thorugh
+
+To do this, modify the `HTML` to disable both the  play / pause button and seek bar so that they are `disabled` at the beginning. You can do so by modifying the `img` line like so:
+
+```html
+<button id="play-pause-container" disabled><img id="play-pause-button" src="images/play.svg"></button>
+```
+
+and add following `css` to style this as invisible:
+
+```css
+/*  play-pause-container button style*/
+#play-pause-container {
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+
+  /* Give a border radius and height */
+  border-radius: round;
+  height: 50px;
+
+  /* set grey background at beginning */
+	background: grey;
+  opacity: 50%;
+}
+```
+
+Modify the `input` element to describe the `seek-bar` line like so:
+
+```html
+<input id="seek-bar" type="range" min="0" value="0" disabled/>
+```
+
+Add following listener to your javascript, which will detect when the audio has fully loaded and therefore can be played, to reenable these two elements when that happens:
+
+```javascript
+//... AT TOP OF FILE ... //
+
+//select play / pause button container element
+const buttonContainer = document.getElementById("play-pause-container");
+
+// ... REST OF CODE ... //
+
+// Enable button and seekbar when audio is ready to play
+audio.oncanplaythrough = function() {
+  buttonContainer.disabled = false;
+  seekBar.disabled = false;
+  
+  //Remove grey background from button container so user knows they can use it
+  buttonContainer.style.background = 'none';
+  buttonContainer.style.opacity = 1;
+}
+```
+
+
+
+## Adding another audio file
+
