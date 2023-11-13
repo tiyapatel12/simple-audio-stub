@@ -683,3 +683,4 @@ audio.oncanplaythrough = function() {
 
 ## Adding another audio file
 
+Let's now look at how we'd add another audio file.
