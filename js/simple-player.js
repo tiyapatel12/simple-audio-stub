@@ -6,20 +6,30 @@ const playPauseButton = document.getElementById("play-pause-button");
 const totalTime = document.getElementById("total-time");
 const trackTime = document.getElementById("current-time");
 const seekBar = document.getElementById("seek-bar");
+const songTitle = document.getElementById("song-title");
+const volumeSlider = document.getElementById('volume-slider');
+const outputContainer = document.getElementById('volume-output');
+
+// buttons to change songs
+const previousSongButton = document.getElementById('previous-song');
+const nextSongButton = document.getElementById("next-song");
+
+// Stores current song playing
+let songPlaying = 0;
 
 // Store whether the user is currently dragging the seek bar
 let seeking = false;
 
 //things to happen at audio load
-audio.onloadeddata = (event) => {
+audio.onloadedmetadata = (event) => {
     totalTime.innerHTML = formatTime(audio.duration);
     seekBar.max = Math.floor(audio.duration);
+    playPauseButton.src = 'images/play.svg';
 }
 
 // things to happen as a live event
 audio.ontimeupdate = (event) => {
     trackTime.innerHTML = formatTime(audio.currentTime);
-    seekBar.value = Math.floor(audio.currentTime);
     // Only update seekbar when user is not dragging seek bar knob
   if (!seeking) {
     seekBar.value = Math.floor(audio.currentTime);
@@ -43,6 +53,52 @@ playPauseButton.onclick = (event) => {
         audio.pause();
     }
 }
+
+// My own Function that can be used in next song button and previous song button, gives each song a number
+const changeSong = () => {
+    if(songPlaying == 0) {
+        audio.src = "audio/queencard.mp3";
+        songTitle.innerHTML = "Queencard - G Idle";
+    }
+
+    if(songPlaying == 1) {
+        audio.src = "audio/supershy.mp3";
+        songTitle.innerHTML = "Super Shy - New Jeans";
+    }
+
+    if(songPlaying == 2) {
+        audio.src = "audio/fearless.mp3";
+        songTitle.innerHTML = "Fearless - Le Sserafim";
+    }
+}
+
+// in this case, 0 is song 1, 1 is song 2 and 2 is song 3
+// 0 is classed as the first number
+// uses if statement to say that if the song is on the 3rd one, when next button is pressed it will go back to the 1st song
+nextSongButton.onclick = (event) => {
+    songPlaying++;
+    if(songPlaying > 2) {
+        songPlaying = 0;
+    }
+
+    changeSong();
+}
+
+previousSongButton.onclick  = (event) => {
+    songPlaying--;
+    if(songPlaying < 0) {
+        songPlaying = 2;
+    }
+
+    changeSong();
+}
+
+volumeSlider.addEventListener('input', (event) => {
+    const value = event.target.value;
+  
+    outputContainer.textContent = value;
+    audio.volume = value / 100;
+  });
 
 // audio.onplay is an event that is triggered every time the audio starts to play
 audio.onplay = (event) => {
