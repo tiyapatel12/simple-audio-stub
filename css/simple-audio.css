@@ -1,0 +1,37 @@
+#play-pause-button {
+    width: 20px;
+    height: 20px;
+}
+
+#container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+}
+
+/* style for all h4 elements */
+h4 {
+    /* Set font family, weight and size */
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 100;
+    font-size: 20px;
+    /* add padding to the bottom so they are not crammed */
+    padding-bottom: 4px;
+    /* Remove user-select to aviod mouse changing to signify text is not selectebeale and prevent vertical bar to appear on scroll */
+    user-select: none;
+  }
+
+  /* current-time element */
+#current-time {
+    /* give width to space letters out */
+    width: 40px;
+    /* give paddin to space add space from other elements */
+    padding-left: 5px;
+  }
+  
+  /* total-time element */
+  #total-time {
+    width: 40px;
+    padding-left: 10px;
+  }
